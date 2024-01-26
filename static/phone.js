@@ -139,10 +139,6 @@
         _pinArray = []
         bindPinToDisplay(_pinArray)
       })
-
-    document.querySelector("#reset-button").addEventListener("click", () => {
-      reset()
-    })
   }
 
   function initLayout() {
