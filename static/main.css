@@ -1,3 +1,9 @@
+@media (min-width: 768px) {
+  body {
+    max-width: 375px; /* Set to the width of a typical mobile screen */
+    margin: 0 auto; /* Center the content */
+  }
+}
 .image-with-glow:hover,
 .image-with-glow:focus {
   filter: drop-shadow(0 0 10px yellow);
