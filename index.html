@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/tailwind.css">
+    <link rel="stylesheet" type="text/css" href="static/main.css">
+    <link rel="stylesheet" type="text/css" href="static/phone.css">
+    <link rel="stylesheet" type="text/css" href="static/parallax-slideshow.css">
+    <script src="https://cdn.tailwindcss.com#.js"></script>
+    <title>ONVITATION - PROPOSE FIRDHA</title>
+</head>
+
+<body class="bg-[#CAC9CE]">
+    <div id="balloon-container"></div>
+    <div id="main" class="min-h-screen flex flex-col items-center justify-center overflow-hidden relative">
+        <!-- First Image (background) -->
+        <img src="images/bg-faml.webp" alt="Background" class="object-cover w-full h-full absolute inset-0 z-0">
+
+        <!-- Sound Icons -->
+        <img src="images/sound-on.webp" alt="Sound" class="absolute w-8 cursor-pointer top-[2%] left-[2%]"
+            id="soundIcon" onclick="toggleSound()">
+
+        <!-- Assets Image -->
+        <img src="images/clock.png" alt="clock"
+            class="absolute max-w-[80%] top-[5%] z-20 cursor-pointer false image-with-glow drop-shadow-md" id="clock">
+        <img src="images/faml-photo.png" alt="photo"
+            class="absolute w-[80%] top-[39%] z-10 cursor-pointer false image-with-glow drop-shadow-md opacity-[0.1%] hover:opacity-100"
+            id="photo" onclick="turnOffLight()">
+        <img src="images/calendar-hbd-faml.png" alt="calendar"
+            class="absolute max-w-[50%] max-h-[23%] top-[32.5%] right-[-21%] z-20 cursor-pointer false image-with-glow opacity-100"
+            id="calendar">
+        <img src="images/orange-cat.gif" alt="orange-cat"
+            class="absolute max-w-[28%] max-h-[14%] bottom-[30.5%] left-[17%] md:lg:xl:left-[12%] z-20 cursor-pointer false image-with-glow"
+            id="cat">
+        <img src="images/notification.gif" alt="notification"
+            class="absolute max-w-[11%] max-h-[15%] min-h-[13%] bottom-[22%] right-[2.2%] md:lg:xl:right-[29%] z-20 cursor-pointer false image-with-glow opacity-80 hover:opacity-100 rounded-md"
+            id="notification">
+    </div>
+
+    <!-- Popup Container -->
+
+    <div id="clockPopup" class="popup">
+        <img class="close-btn" src="images/close-btn.png" onclick="closePopup()" alt="close-button" />
+        <p class="z-10 text-black text-justify absolute p-[50px] top-[2%] left-[2%] right-[1%]"></p>
+        <img id="clockImage" src="" alt="Popup Clock" class="object-cover w-full shadow-lg" />
+    </div>
+
+    <div id="photoPopup" class="popup-photo brightness-[100%]">
+        <img class="close-btn" src="images/close-btn.png" onclick="closePopup()" alt="close-button" />
+        <div class="slideshow">
+            <img src="https://images.unsplash.com/photo-1480796927426-f609979314bd?w=500&q=50" />
+            <img src="https://images.unsplash.com/photo-1492571350019-22de08371fd3?w=500&q=50" />
+            <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=500&q=50" />
+            <img src="https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=500&q=50" />
+            <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=500&q=50" />
+            <img src="https://images.unsplash.com/photo-1542931287-023b922fa89b?w=500&q=50" />
+        </div>
+    </div>
+
+    <div id="calendarPopup" class="popup">
+        <img class="close-btn" src="images/close-btn.png" onclick="closePopup()" alt="close-button" />
+        <img id="calendarImage" src="" alt="Popup Calendar" class="object-cover w-full shadow-lg" />
+    </div>
+
+    <div id="catPopup" class="popup">
+        <img class="close-btn top-[5%] right-[3%]" src="images/close-btn.png" onclick="closePopup()"
+            alt="close-button" />
+        <p class="z-10 text-white absolute p-[25px] mx-auto transform rotate-[2deg]"></p>
+        <audio controls id="catMusic" class="z-20 absolute bottom-[20%] left-[13%] w-[48%] transform rotate-[2deg]"
+            onclick="toggleSound()">
+            <source src="audio/cat-hbd.mp3" type="audio/mp3">
+            Your browser does not support the audio tag.
+        </audio>
+        <img id="catImage" src="" alt="Popup Calendar" class="object-cover w-full shadow-lg" />
+    </div>
+
+    <div id="notificationPopup" class="popup-phone">
+        <img class="close-btn top-[5%] right-[3%]" src="images/close-btn.png" onclick="closePopup()"
+            alt="close-button" />
+
+        <div class="device">
+            <div class="device-bezel">
+                <div class="device-viewport">
+                    <!-- Begin custom content -->
+                    <div class="phone-content overflow-y-auto">
+                        <img src="images/faml.gif" />
+                        <div class="phone-body-content relative overflow-y-auto p-2 h-[100vh] pb-[500px]">
+                            <p class="text-justify"></p>
+                            <button id="accept">Terima</button>
+                        </div>
+                    </div>
+                    <div class="phone-container">
+                        <div class="pin-info">
+                            <h1 class="page-title">Enter Your PIN</h1>
+                        </div>
+                        <div class="pin-display">
+                            <div class="circle-lock--container">
+                                <div class="circle-lock">
+                                    <i class="material-icons lock-icon">lock</i>
+                                </div>
+                            </div>
+                            <div class="confirmation-dots">
+                                <svg>
+                                    <g>
+                                        <circle class="pin-circle" cx="10" cy="10" r="8"></circle>
+                                        <circle class="pin-circle" cx="50" cy="10" r="8"></circle>
+                                        <circle class="pin-circle" cx="90" cy="10" r="8"></circle>
+                                        <circle id="lastConfirmDot" class="pin-circle" cx="130" cy="10" r="8"></circle>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="keypad">
+                                <div class="keypad--row">
+                                    <div id="keypad-1" class="keypad--button" data-value="1"
+                                        onclick="playSound('audio/notification.wav')">1</div>
+                                    <div class="keypad--button" data-value="2"
+                                        onclick="playSound('audio/notification.wav')">2</div>
+                                    <div class="keypad--button" data-value="3"
+                                        onclick="playSound('audio/notification.wav')">3</div>
+                                </div>
+                                <div class="keypad--row">
+                                    <div class="keypad--button" data-value="4"
+                                        onclick="playSound('audio/notification.wav')">4</div>
+                                    <div class="keypad--button" data-value="5"
+                                        onclick="playSound('audio/notification.wav')">5</div>
+                                    <div class="keypad--button" data-value="6"
+                                        onclick="playSound('audio/notification.wav')">6</div>
+                                </div>
+                                <div class="keypad--row">
+                                    <div class="keypad--button" data-value="7"
+                                        onclick="playSound('audio/notification.wav')">7</div>
+                                    <div id="keypad-8" class="keypad--button" data-value="8"
+                                        onclick="playSound('audio/notification.wav')">8</div>
+                                    <div class="keypad--button" data-value="9"
+                                        onclick="playSound('audio/notification.wav')">9</div>
+                                </div>
+                                <div class="keypad--row">
+                                    <div class="keypad--button keyboard--button__back-arrow">&#60;</div>
+                                    <div class="keypad--button" data-value="0">0</div>
+                                    <div class="keypad--button keyboard--button__x">x</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end custom content -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <audio id="backgroundMusic" loop autoplay class="d-none">
+        <source id="bgmSource" src="audio/bgm.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
+</body>
+
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.js"></script>
+<script src="static/phone.js"></script>
+<script src="static/parallax-slideshow.js"></script>
+<script src="static/htmx.min.js"></script>
+
+<script>
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    const bgmSource = document.getElementById('bgmSource');
+    const catMusic = document.getElementById('catMusic');
+
+    htmx.find('#keypad-8').addEventListener('click', () => {
+        console.log("masukkkk")
+        setTimeout(() => {
+            console.log("Code executed after delay");
+            const myElement = document.getElementById("lastConfirmDot");
+            const hasClass = myElement.classList.contains("success");
+
+            soundIcon.addEventListener('click', toggleSound);
+            if (hasClass) {
+                changeBgmMusic('audio/knph.mp3');
+            }
+        }, 500);
+
+    });
+
+    document.body.addEventListener('click', (event) => {
+        if (backgroundMusic.paused) {
+            backgroundMusic.play();
+        }
+    });
+
+
+    function stopHbdSound() {
+        catMusic.pause();
+        catMusic.currentTime = 0;
+        if (backgroundMusic.muted) {
+            toggleSound()
+        }
+    }
+
+    function toggleSound() {
+        backgroundMusic.muted = !backgroundMusic.muted;
+        document.getElementById('soundIcon').src = backgroundMusic.muted ? 'images/sound-off.webp' : 'images/sound-on.webp';
+    }
+
+    function changeBgmMusic(file) {
+        backgroundMusic.src = file;
+        bgmSource.play();
+    }
+</script>
+
+<script>
+    const filePath = "https://onvitation-photos.oss-ap-southeast-5.aliyuncs.com/faml/";
+    let popup = document.getElementById('calendarPopup');
+
+    // Image click event listeners
+    const clock = document.getElementById('clock');
+    const calendar = document.getElementById('calendar');
+    const cat = document.getElementById('cat');
+    const notification = document.getElementById('notification');
+    const photo = document.getElementById('photo');
+
+    const clockMessage = "Jam ini merupakan clue 2 angka pertama untuk membuka kata sandi pada hape. Perhatikan jam dan piringnya, maka akan mendapatkan tanggal dari suatu hari. jumlahkan huruf dari hari tersebut (misal \"ayo\" berarti A+Y+O=42). 2 angka berikutnya merupakan jumlah gigi yang ada di kalendar kemudian \n dikali dua \n \n GOODLUCK 🥳"
+
+    const catMessage = "Ini pesan gadak isinya cuma biar seorang Firdha senang aja. Sengaja kupake kucing oren karena dari semua tipe kucing yang paling mirip sama lu tuh cuma si oren. dari ngeselinnya, bikin emosi, galak kek preman tapi kalo gadak si oren juga kurang seru dunia perkucingan. Dan ini ada ucapan dari komunitas meow-meow"
+
+    const proposeMessage = "Hi Kebo, \n Gak terasa ya kita sudah bersama selama 4 tahun ini dan selama itu juga kedamaian hidup aku mulai terusik sama lu 😡. Jujur ya lu tuh orang yang paling unik, nyebelin sering bikin kesal tapi kalau lagi marahan dan dieman sama mu tuh aku malah nyariin, persis banget kek kucing abis mecahin gelas. Tapi inget gak yg awal dulu kita pdktan? intens telponan, saling pamerin makanan, tebak lagu, bahas marvel, apalagi yak... padahal aku sebenarnya gak berharap apapun dengan \"kenalan\" si tata cuma karena lu orangnya beda banget. Tapi ya, aku banyak ketipu sama lu kek cuek tapi dikit2 \"yang kangennn\" kek video diatas, sok bodoamatan padahal lu orang yang paling care sama orang lain, sok kuat tapi si paling cengeng dan sok ngeselin... eh tapi ini emang lu ngeselin. But you are special lah, lu berhasil meluluhkan hatiku dengan brutal. Karena makin kesini aku makin sadar dari sisi ngeselin lu itu, banyak hal yg spesial di dirimu kek martabak telor. lu orang yg gapernah nyerah, gapernah mau nyusahin orang, selalu mikir apa yg aku senang, selalu ngrayain aku, mau dengerin nasihat orang walaupun harus ratusan kali dibilang dulu, dan banyak hal yg buat aku amazed sama mu terutama indomie goreng yang lu masak pertama kali. \n \n \"Nunc Scio Quid Sit Amor\"  \n Sekarang aku tau apa itu cinta, Sesuatu yang tidak bisa kumengerti dimana aku terkadang membencinya tetapi ketika dia menjauh aku malah merindukannya. Seseorang yang bukan hanya akan lu puja tetapi dia yang berhasil membuatmu menjadi pujaannya, seseorang yang tidak pernah nyerah dan mempertahankan mu walaupun dia tau dia akan terus tersakiti. \n \n  مكاني المفضل هو معك. \n \"Makānī al-mufaḍḍal huwa maʿak\". Dirimu selalu mencari tempat-tempat untuk kita pergi padahal bagiku selama bersama denganmu itu akan menjadi tempat favoritku \n \n Intinya terima kasih banyak sudah bersamaku selama ini dan sebenarnya ini adalah proposal cuma karena aku gatau mau buat apaan jadi gabungin sama ulang tahun ajalah.... Jadi karena ini proposal, maukah kau tetap bersamaku, menjalani kehidupan yang baru, menjadi ibu dari anak-anak ku --lu tambahin sendiri dah kalimatnya gatau lagi aku--. Seperti lagu ini katakanlah \"Kaho Na Pyaar Hai\" dengan memilih setuju pada tombol dibawah --emang gadak opsi buat nolak--"
+
+    clock.addEventListener('click', () => openPopup('clock', 'images/dialog-paper.jpg', clockMessage));
+    calendar.addEventListener('click', () => openPopup('calendar', 'images/calendar-hbd-faml.png', ''));
+    cat.addEventListener('click', () => openPopup('cat', 'images/dialog-cat.png', catMessage));
+    notification.addEventListener('click', () => openPopup('notification', '', proposeMessage));
+    photo.addEventListener('click', () => openPopup('photo', '', ''));
+
+    function openPopup(type, imageSrc, text) {
+        closePopup();
+        popup = document.getElementById(`${type}Popup`);
+        if (type !== 'notification' && type !== 'photo') {
+            const popupImage = document.getElementById(`${type}Image`);
+            popupImage.src = imageSrc;
+        }
+        playSound(`audio/${type}.wav`);
+        if (type === 'cat' || type === 'clock' || type == 'notification') popup.querySelector('p').innerText = text;
+        popup.style.display = 'block';
+    }
+
+    function closePopup() {
+        popup.style.display = 'none';
+        stopHbdSound()
+        turnOnLight()
+    }
+
+    function playSound(url) {
+        const audio = new Audio(url);
+        audio.play();
+    }
+
+    function turnOffLight() {
+        htmx.removeClass(htmx.find('#main'), 'brightness-[100%]');
+        htmx.addClass(htmx.find('#main'), 'brightness-[10%]');
+    }
+
+    function turnOnLight() {
+        htmx.addClass(htmx.find('#main'), 'brightness-[100%]');
+        htmx.removeClass(htmx.find('#main'), 'brightness-[10%]');
+    }
+</script>
+
+<script>
+    const balloonContainer = document.getElementById("balloon-container");
+
+    function random(num) {
+        return Math.floor(Math.random() * num);
+    }
+
+    function getRandomStyles() {
+        var r = random(255);
+        var g = random(255);
+        var b = random(255);
+        var mt = random(200);
+        var ml = random(50);
+        var dur = random(5) + 5;
+        return `
+  background-color: rgba(${r},${g},${b},0.7);
+  color: rgba(${r},${g},${b},0.7);
+  box-shadow: inset -7px -3px 10px rgba(${r - 10},${g - 10},${b - 10},0.7);
+  margin: ${mt}px 0 0 ${ml}px;
+  animation: float ${dur}s ease-in infinite
+  `;
+    }
+
+    function createBalloons(num) {
+        for (var i = num; i > 0; i--) {
+            var balloon = document.createElement("div");
+            balloon.className = "balloon";
+            balloon.style.cssText = getRandomStyles();
+            balloonContainer.append(balloon);
+        }
+    }
+
+    function removeBalloons() {
+        balloonContainer.style.opacity = 0;
+        setTimeout(() => {
+            balloonContainer.remove()
+        }, 500)
+    }
+
+    document.getElementById('calendar').addEventListener('click', () => {
+        createBalloons(50);
+        setTimeout(() => {
+            removeBalloons();
+        }, 30000);
+    })
+    // window.addEventListener("load", () => {
+    //     createBalloons(30)
+    // });
+
+    // window.addEventListener("click", () => {
+    //     removeBalloons();
+    // });
+</script>
